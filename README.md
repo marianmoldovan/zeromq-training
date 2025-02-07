@@ -33,7 +33,7 @@ pnpm install zeromq
 
 The ZeroMQ PAIR socket pattern is strictly 1-to-1, bidirectional communication.  It's designed for exactly two peers to communicate directly with each other.  Unlike other patterns like PUB/SUB or PUSH/PULL, PAIR sockets cannot be connected to multiple peers.  Each PAIR socket must be connected to exactly one other PAIR socket.  It's the closest ZeroMQ pattern to a traditional, direct socket connection but with the added benefits of ZeroMQ's message handling.
 
-![Pair](pair/diagram.png)
+![Pair](src/pair/diagram.png)
 
 Sample in the folder `src/zeromq/pair`.
 
@@ -46,7 +46,7 @@ The ZeroMQ Request/Reply (REQ/REP) pattern implements a classic client/server ar
 
 So, while the client can communicate with multiple servers, the communication for each individual request is effectively 1-to-1.  It's more accurate to describe it as 1-to-N (with 1-to-1 request-reply cycles). This distinguishes it from pure 1-to-N patterns where a single message from the sender is received by multiple receivers simultaneously.  In REQ/REP, each message from the client is directed to one server, and that server sends one reply back to the client.
 
-![Request/Reply](request_reply/diagram.png)
+![Request/Reply](src/request_reply/diagram.png)
 
 Difference with Pair?
 
@@ -79,7 +79,7 @@ Example TBD
 
 The ZeroMQ Push/Pull pattern is primarily a 1-to-N (one-to-many) communication pattern.
 
-![img.png](push_pull/diagram.png)
+![img.png](src/push_pull/diagram.png)
 
 The Push/Pull pipeline pattern in ZeroMQ allows you to distribute work across multiple worker processes.  A "Push" socket acts as a distributor, evenly sending messages to connected "Pull" sockets (the workers). This resembles a producer/consumer model, but with a crucial difference: the worker's results aren't sent back upstream. Instead, they flow downstream to another Push/Pull socket (or another type of socket), forming a pipeline.  Data moves only in one direction through the pipeline stages, and each stage can connect to one or more worker nodes.  When a stage has multiple workers, messages are automatically load-balanced across them, ensuring efficient distribution of the workload.
 
@@ -90,7 +90,7 @@ Sample in the folder `src/zeromq/push_pull`.
 
 ZeroMQ's PUB/SUB pattern decouples message senders (publishers) and receivers (subscribers). Publishers send messages tagged with "topics," and subscribers receive only messages matching their subscribed topics.  A single subscriber can listen to multiple topics from one or more publishers.  It's asynchronous; subscribers only receive messages published after they subscribe.  Filtering happens on the subscriber side.  Great for real-time data distribution and event notification.
 
-![Diagram](pub_sub/diagram.png)
+![Diagram](src/pub_sub/diagram.png)
 
 
 #### Comparison
@@ -113,3 +113,8 @@ In simple terms:
 ### Next steps
 
 The definitive guide to ZeroMQ is the "ZeroMQ Guide" by Pieter Hintjens. It's a comprehensive resource that covers everything from basic concepts to advanced patterns and real-world use cases. You can find it online at [zguide.zeromq.org](https://zguide.zeromq.org).
+
+
+Ackonwledgements:
+
+Diagrams from https://learning-0mq-with-pyzmq.readthedocs.io/en/latest/index.html
